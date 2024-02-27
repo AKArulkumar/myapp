@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Generator</title>
+    <!-- QuaggaJS -->
+    <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+</head>
+<body>
+    <h1>Generated Barcode</h1>
+
+    {% if last_barcode_data %}
+        <p>Barcode Data: {{ last_barcode_data }}</p>
+        <img src="{{ url_for('barcode_image') }}" alt="Barcode">
+    {% else %}
+        <p>No barcode generated yet.</p>
+    {% endif %}
+
+    <a href="{{ url_for('generate_barcode_route') }}">Generate Barcode</a>
+
+    <h2>Scan Barcode</h2>
+    <div id="scanner-container"></div>
+
+    <script>
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: document.querySelector('#scanner-container'),
+            },
+            decoder: {
+                readers: ["ean_reader"]
+            }
+        });
+
+        Quagga.start();
+
+        Quagga.onDetected(function(result) {
+            console.log('Barcode detected and processed', result);
+            // You can handle the result as needed, e.g., send it to the server.
+            alert('Scanned Barcode: ' + result.codeResult.code);
+        });
+    </script>
+</body>
+</html>

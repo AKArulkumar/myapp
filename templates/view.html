@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title> VIEW INVENTORY</title>
+    <style>
+
+  <style>
+      header{
+
+      text-align:center;
+      background-color:yellowgreen;
+      font-size: 30px;
+
+
+          }
+
+       .row{
+                display: flex;
+
+            }
+            .row:after{
+                content: "";
+                display: table;
+            }
+      .column1{
+               width: 25%;
+                height: 1000px;
+                background-color: rgb(227, 221, 221);
+                float: left;
+
+            }
+      .column2{
+      width: 75%;
+      height:1000px;
+
+      }
+      ul{
+        list-style: none;
+        padding:left 1px;
+        margin: 0px;
+        text-decoration: none;
+    }
+    li{
+
+        padding: 8px;
+        margin-bottom: 5px;
+       text-decoration: none;
+        background-color: rgb(143, 209, 209);
+    }
+    li:hover{
+        display: block;
+        color: rgb(100, 199, 110);
+        background-color: rgb(49, 27, 191);
+    }
+    .cont{
+
+        width: 300px;
+        height:30%;
+        background-color:rgb(101, 79, 79);
+        padding: 15px;
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+    .cont1{
+        width: 300px;
+        height:30%;
+        background-color:rgb(135, 49, 49);
+        padding: 15px;
+        margin-left: 350px;
+        margin-top: 5px;
+
+    }
+    a{
+        text-decoration: none;
+    }
+       /* Add your CSS styles here */
+       body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+
+        header{
+        background-color: blue;
+            text-align: center;
+            font-size:30px;
+
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <header> USER VIEW INVENTORY</header>
+
+    <div class="row">
+        <div class="column1" style="float: left;">
+            <ul>
+                <li><a href="{{ url_for('user',id=userid) }}">HOME</a></li>
+                <li><a href="{{ url_for('view',id=userid) }}">VIEW PRODUCT</a></li>
+                <li><a href="{{ url_for('order',id=userid) }}">MY ORDER</a></li>
+                <li><a href="#">CONTACT</a></li>
+                <li><a href="{{ url_for('user_login') }}">LOGOUT</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <h1>Inventory Management - MY ORDER</h1>
+            <h2>View All Orders</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="inventory">
+                    {% for pro in data %}
+                    <tr>
+                        <td>{{ pro[1] }}</td>
+                        <td>{{ pro[2] }}</td>
+                        <td>{{ pro[3] }}</td>
+                        <td>{{ pro[4] }}</td>
+                       <td><a href="{{url_for('addorder',id=pro[0])}}" >Order</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+             <h2>Cart</h2>
+        <ul id="cart"></ul>
+        </div>
+
+        <script>
+            // JavaScript code to order products
+            const orders = [];
+
+            function orderProduct(productName, productPrice) {
+                const quantity = prompt(`Enter quantity for ${productName}:`);
+                if (quantity && !isNaN(quantity) && parseInt(quantity) > 0) {
+                    const total = parseFloat(productPrice) * parseInt(quantity);
+                    const order = {
+                        product: productName,
+                        quantity: parseInt(quantity),
+                        total: total
+                    };
+                    orders.push(order);
+                    updateCart();
+                }
+            }
+
+            function updateCart() {
+                const cartList = document.getElementById("cart");
+                cartList.innerHTML = "";
+                orders.forEach(order => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${order.product} - Quantity: ${order.quantity} - Total: $${order.total}`;
+                    cartList.appendChild(listItem);
+                });
+            }
+        </script>
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+
+<html >
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title> ADMIN product inventry</title>
+
+
+  <style>
+      header{
+   
+      text-align:center;
+      background-color:yellowgreen;
+      font-size: 30px;
+
+     
+          }
+
+       .row{
+                display: flex;
+
+            }
+            .row:after{
+                content: "";
+                display: table;
+            }
+      .column1{
+               width: 25%;
+                height: 1000px;
+                background-color: rgb(227, 221, 221);
+                float: left;
+
+            }
+      .column2{
+      width: 75%;
+      height:1000px;
+     
+      }
+      ul{
+        list-style: none;
+        padding:left 1px;
+        margin: 0px;
+        text-decoration: none;
+    }
+    li{
+        
+        padding: 8px;
+        margin-bottom: 5px;
+       text-decoration: none;
+        background-color: rgb(143, 209, 209);
+    }
+    li:hover{
+        display: block;
+        color: rgb(100, 199, 110);
+        background-color: rgb(49, 27, 191);
+    }
+    .cont{
+      
+        width: 300px;
+        height:30%;
+        background-color:rgb(101, 79, 79);
+        padding: 15px;
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+    .cont1{
+        width: 300px;
+        height:30%;
+        background-color:rgb(135, 49, 49);
+        padding: 15px;
+        margin-left: 350px;
+        margin-top: 5px;
+       
+    }
+    a{
+        text-decoration: none;
+    }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .product-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+     
+      
+
+
+  </style>
+</head>
+  <body>
+
+       <header> ADMIN  INVENTRY</header>
+        <div class="row">
+
+             <div class="column1" style="float: left;">
+
+                  <ul>
+    <li><a href="{{ url_for('homepage') }}">HOME</a></li>
+    <li><a href="{{ url_for('add_product') }}">ADD PRODUCT</a></li>
+    <li><a href="{{ url_for('viewproduct') }}">VIEW PRODUCT</a></li>
+
+    <li><a href="{{ url_for('adminorder') }}">VIEW ORDER</a></li>
+<!--                      <li><a href="{{ url_for('barcode') }}">barcode</a></li>-->
+                      <li><a href="{{ url_for('cam') }}">CAMARA</a></li>
+
+    <li><a href="#">CONTACT</a></li>
+    <li><a href="#">LOGOUT</a></li>
+</ul>
+             </div>
+             <div class="container">
+        <div class="product-info">
+            <h2>Product Information</h2>
+            <p>Total Products: {{data1}}<span id="product-count"></span></p>
+        </div>
+        <div class="product-info">
+            <h2>Order Information</h2>
+            <p>Total Orders: {{count1}} <span id="order-count"></span></p>
+        </div>
+         </div>
+
+        </div>
+   <script>
+<!--        // Replace these values with actual product and order counts-->
+<!--        const productCount = 100; // Example: Total number of products-->
+<!--        const orderCount = 50;   // Example: Total number of orders-->
+
+<!--        // Update the product and order counts in the HTML-->
+<!--        document.getElementById('product-count').textContent = productCount;-->
+<!--        document.getElementById('order-count').textContent = orderCount;-->
+<!--    </script>-->
+    </body>
+    </html>
